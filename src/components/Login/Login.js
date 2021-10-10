@@ -11,6 +11,9 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  // You must add all "things" you use in your effect function
+  // if those "things" could change because your component
+  // (or some parent component) re - rendered.
   useEffect(() => {
     setFormIsValid(
       enteredEmail.includes("@") && enteredPassword.trim().length > 6
