@@ -15,9 +15,22 @@ const Login = (props) => {
   // if those "things" could change because your component
   // (or some parent component) re - rendered.
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6
-    );
+    // Debouncing the function - so it wont send the request to the server
+    // on every keystroke
+    const identifier = setTimeout(() => {
+      console.log("Checking form validity");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    // Adding a clean up function so it will clean the Effect after the first time each time the component re-renders (is mounted)
+    return () => {
+      console.log("clean up");
+      // A clean up function is needed to prevent memory leaks
+      // Its a browser function that cleans up the memory
+      clearTimeout(identifier);
+    };
   }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
