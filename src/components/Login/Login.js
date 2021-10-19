@@ -39,6 +39,9 @@ const Login = (props) => {
   });
 
   // object destructuring to pull out the properties of an object
+  // and get only the boolean value (alias assigned to isValid)
+  // to optimize the useEffect and only check for validity  once it is valid
+  // it wont keep updating the state when the value is changing (but the valid is reached)
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
 
